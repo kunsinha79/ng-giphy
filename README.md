@@ -1,6 +1,17 @@
 # NgGiphy
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
+It allows to search gifs grom GIPHY based on search term. This applications presents a search bar. Enter term into the bar and a total of 20 gifs with a pagination (if applicable) will appear.
+Initially there will be no gifs loaded.
+
+## Prequisites:
+1. npm 6.0
+2. angular 8.0
+3. angular-cli 8.0
+
+##How to
+1. Go to ng-giphy
+2. `npm install`
 
 ## Development server
 
@@ -18,9 +29,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Further help
 

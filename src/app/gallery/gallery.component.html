@@ -1,0 +1,14 @@
+<div class="col-12 justify-content-center mb-5">
+  <span *ngIf="isLoading">Loading...</span>
+  <img class="img-responsive" *ngFor="let image of data" [attr.src]="image.images.original.url" src=""/>
+</div>
+<div *ngIf="pageSize > 0" class="col-12 justify-content-center mb-5">
+  <ngb-pagination [collectionSize]="pageSize"
+                  [pageSize]="50"
+                  [(page)]="page"
+                  [maxSize]="7"
+                  [rotate]="true"
+                  [boundaryLinks]="true"
+                  (pageChange)="fetchGifPages($event)"></ngb-pagination>
+</div>
+
