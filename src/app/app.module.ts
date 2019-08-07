@@ -10,13 +10,15 @@ import {AppGalleryComponent} from './gallery/gallery.component';
 import {SearchService} from './services/search.service';
 import {AppSearchComponent} from './search/search.component';
 import {AppLoaderComponent} from './loader/loader.component';
+import {AppErrorComponent} from './app.error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppGalleryComponent,
     AppSearchComponent,
-    AppLoaderComponent
+    AppLoaderComponent,
+    AppErrorComponent
   ],
   imports: [
     BrowserModule,

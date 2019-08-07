@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AppSearchComponent} from './search/search.component';
+import {AppErrorComponent} from './app.error.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'giphy',
     component: AppSearchComponent
+  },
+  {
+    path: '**',
+    component: AppErrorComponent
   }
 ];
 
