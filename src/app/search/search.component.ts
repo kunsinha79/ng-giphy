@@ -1,34 +1,36 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchService} from '../services/search.service';
-import {ReplaySubject} from 'rxjs';
-import {filter} from 'rxjs/operators';
+import {ReplaySubject, Subject} from 'rxjs';
+import {debounceTime, filter, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html'
 })
 export class AppSearchComponent implements OnInit, OnDestroy {
-  term$ = new ReplaySubject<string | undefined>();
+  term$ = new ReplaySubject();
   termStr: string;
-  subscriptions = [];
+  unsubscribe$ = new Subject();
 
   constructor(private searchService: SearchService) { }
 
   ngOnInit() {
-    this.subscriptions.push(this.term$.pipe(
+    this.term$.pipe(
+      takeUntil(this.unsubscribe$),
+      debounceTime(1000),
       filter(term => !!term)
     ).subscribe((term: string) => {
       this.termStr = term;
-      this.subscriptions.push(this.fetchGifs(0));
-    }));
+      this.fetchGifs(0);
+    });
   }
 
-  fetchGifs(pageNumber: number): any {
+  fetchGifs(pageNumber: number): void {
     this.searchService.search (this.termStr, pageNumber, `q=${this.termStr}&limit=20&offset=0`);
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-    this.subscriptions = [];
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

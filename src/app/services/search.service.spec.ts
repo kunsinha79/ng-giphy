@@ -2,33 +2,13 @@ import {SearchService} from './search.service';
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {HttpClient} from '@angular/common/http';
-import {GiphyContent, SearchOptions} from '../app.types';
 import {of} from 'rxjs';
+import {mockGifs, mockOptions} from '../__tests/mocks/mocks';
 
 describe ('SearchService', () => {
   let service: SearchService;
   let http: HttpClient;
-  const mockGifs: GiphyContent = {
-    data: [{
-      id: 1,
-      image: []
-    },
-      {
-        id: 1,
-        image: []
-      }],
-    meta: {
-      status: 200,
-      msg: 'Hello',
-      response_id: '12345'
-    },
-    pagination: {
-      count: 2,
-      offset: 0,
-      total_count: 10
-    }
-  };
-  const mockOptions: SearchOptions = {termStr: 'xyz', pageNumber: 0};
+
   beforeEach( () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],

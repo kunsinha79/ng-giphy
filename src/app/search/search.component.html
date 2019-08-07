@@ -1,8 +1,22 @@
-<div class="row">
-  <div class="col-12 justify-content-center mb-5">
-    <input class="form-control" type="text" id="keyword" placeholder="search for gifs..." (keyup)="term$.next($event.target.value)" autofocus/>
-  </div>
-  <div class="col-12 justify-content-center mb-5">
-    <app-giphy></app-giphy>
-  </div>
-</div>
+<div class="row align-items-center">
+     <div class="col" style="text-align: center">
+       <h1>GIF Explorer</h1>
+     </div>
+   </div>
+ <div class="row align-items-center">
+   <div class="col">
+     <input
+       class="form-control" type="text"
+       id="keyword"
+       placeholder="Enter text to search for gifs..."
+       (keyup)="term$.next($event.target.value)"
+       autofocus/>
+   </div>
+ </div>
+   <div class="row align-items-center">
+     <app-gallery></app-gallery>
+   </div>
+
+
+
+

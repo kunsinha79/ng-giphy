@@ -1,0 +1,23 @@
+.container-body {
+  @media (min-width: 576px) {
+    width: 100%;
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) {
+    max-width: 400px;
+    margin: 24px auto;
+  }
+
+  // Large devices (desktops, 992px and up)
+  @media (min-width: 992px) {
+    max-width: 400px;
+    margin: 24px auto;
+  }
+
+  // Extra large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) {
+    max-width: 800px;
+    margin: 24px auto;
+  }
+}

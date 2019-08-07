@@ -6,15 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {AppGiphyComponent} from './gallery/gallery.component';
+import {AppGalleryComponent} from './gallery/gallery.component';
 import {SearchService} from './services/search.service';
 import {AppSearchComponent} from './search/search.component';
+import {AppLoaderComponent} from './loader/loader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppGiphyComponent,
-    AppSearchComponent
+    AppGalleryComponent,
+    AppSearchComponent,
+    AppLoaderComponent
   ],
   imports: [
     BrowserModule,

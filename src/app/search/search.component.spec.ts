@@ -1,11 +1,12 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {SearchService} from '../services/search.service';
 import {AppSearchComponent} from './search.component';
 import {HttpClient} from '@angular/common/http';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {AppGiphyComponent} from '../gallery/gallery.component';
+import {AppGalleryComponent} from '../gallery/gallery.component';
 import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import {By} from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 describe ('AppSearchComponent', () => {
   let searchComponent: AppSearchComponent;
@@ -15,7 +16,8 @@ describe ('AppSearchComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, NgbPaginationModule],
       providers: [SearchService, HttpClient],
-      declarations: [AppSearchComponent, AppGiphyComponent]
+      declarations: [AppSearchComponent, AppGalleryComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
     fixture = TestBed.createComponent(AppSearchComponent);
     searchComponent = fixture.componentInstance;
@@ -26,7 +28,7 @@ describe ('AppSearchComponent', () => {
   it('should create', () => {
     expect(searchComponent).toBeTruthy();
   });
-  it('should call fetchGifs when input element gets value', () => {
+  it('should call fetchGifs when input element gets value', fakeAsync(() => {
     searchComponent.ngOnInit();
     fixture.detectChanges();
     spyOn<any>(searchComponent, 'fetchGifs');
@@ -38,15 +40,18 @@ describe ('AppSearchComponent', () => {
       bubbles : true, cancelable : true, shiftKey : false
     });
     inputElement.dispatchEvent(event);
-    expect(searchComponent.termStr).toEqual('puppies');
-    expect(searchComponent.fetchGifs).toHaveBeenCalled();
-  });
-  it( 'should call fetchGifs when term$ gets a value', () => {
-    spyOn<any>(searchComponent, 'fetchGifs');
-    searchComponent.term$.next('puppies');
-    searchComponent.ngOnInit();
+    tick(1000);
     fixture.detectChanges();
     expect(searchComponent.termStr).toEqual('puppies');
     expect(searchComponent.fetchGifs).toHaveBeenCalled();
-  });
+  }));
+  it( 'should call fetchGifs when term$ gets a value', fakeAsync(() => {
+    spyOn<any>(searchComponent, 'fetchGifs');
+    searchComponent.term$.next('puppies');
+    fixture.detectChanges();
+    tick(1000);
+    fixture.detectChanges();
+    expect(searchComponent.termStr).toEqual('puppies');
+    expect(searchComponent.fetchGifs).toHaveBeenCalled();
+  }));
 });
